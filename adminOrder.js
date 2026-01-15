@@ -1,8 +1,12 @@
-// ------------------ 1️⃣ Firebase Setup ------------------
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, query, orderBy, onSnapshot } from "firebase/firestore";
+1 of 192
+(no subject)
+Inbox
 
-// Firebase config (tumhara project)
+Moonlit Soul
+10:51 PM (4 minutes ago)
+to me
+
+// Firebase setup (compat)
 const firebaseConfig = {
   apiKey: "AIzaSyBCBblQ0_4HVmv-_-WFbE2xn8rHGAI-DrM",
   authDomain: "elvira-8a512.firebaseapp.com",
@@ -11,13 +15,11 @@ const firebaseConfig = {
   messagingSenderId: "699500729069",
   appId: "1:699500729069:web:05b7fee369e039ae73f2e4"
 };
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-// ------------------ 2️⃣ Orders Display ------------------
+// Orders display
 const ordersEl = document.getElementById("orders");
-
 function renderOrders(orders) {
   ordersEl.innerHTML = "";
   orders.forEach(order => {
@@ -33,7 +35,7 @@ function renderOrders(orders) {
   });
 }
 
-// ------------------ 3️⃣ Gmail Script Email Notification ------------------
+// Gmail Script Notification
 function sendEmailNotification(order){
   fetch("https://script.google.com/macros/s/AKfycbzoMYIAfoa88OEo83SWhpSUClsBmLC8tZZp-LgsHz8Hwww4UbYH-BO5m_qq9woiIOyh/exec", {
     method: "POST",
@@ -43,20 +45,17 @@ function sendEmailNotification(order){
       image: order.image,
       timestamp: new Date(order.timestamp.seconds*1000).toLocaleString()
     })
-  }).then(res => console.log("Email sent via Gmail Script"))
+  }).then(res => console.log("Email sent"))
     .catch(err => console.error(err));
 }
 
-// ------------------ 4️⃣ Real-time Orders + Notifications ------------------
-const q = query(collection(db, "orders"), orderBy("timestamp", "desc"));
-onSnapshot(q, (snapshot) => {
+// Real-time Orders
+db.collection("orders").orderBy("timestamp","desc").onSnapshot(snapshot=>{
   const orders = [];
-  snapshot.forEach(doc => orders.push(doc.data()));
+  snapshot.forEach(doc=>orders.push(doc.data()));
   renderOrders(orders);
-
-  // Alert & send email for new orders only
-  snapshot.docChanges().forEach(change => {
-    if(change.type === "added") {
+  snapshot.docChanges().forEach(change=>{
+    if(change.type==="added"){
       alert("New Order Received!");
       sendEmailNotification(change.doc.data());
     }
