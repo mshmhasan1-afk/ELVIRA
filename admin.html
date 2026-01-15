@@ -3,25 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ELVIRA Admin</title>
+  <title>ELVIRA Admin Panel</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: Arial, sans-serif; background:#1c1c1c; color:#fff; }
+    .admin-login { max-width:400px; margin:50px auto; background:#222; padding:20px; border-radius:10px; }
+    .admin-login input, .admin-login button { display:block; width:100%; margin:10px 0; padding:10px; border-radius:5px; border:none; }
+    #panel { display:none; margin:20px; }
+    .panel-section { background:#222; padding:20px; border-radius:10px; margin-bottom:20px; }
+    .order-card { display:flex; align-items:center; gap:10px; background:#333; padding:10px; margin:5px 0; border-radius:5px; }
+    .order-card img { border-radius:5px; }
+    .order-card span { margin-left:auto; }
+  </style>
 </head>
 <body>
+
+  <!-- Admin Login -->
   <div class="admin-login">
     <h2>Admin Login</h2>
-    <input id="email" placeholder="Email">
-    <input id="password" type="password" placeholder="Password">
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
     <button id="login">Login</button>
   </div>
 
-  <div id="panel" style="display:none;">
-    <h3>Add New Product</h3>
-    <input id="name" placeholder="Product Name">
-    <input id="price" placeholder="Price">
-    <input id="image" type="file">
-    <button id="add">Add Product</button>
+  <!-- Admin Panel -->
+  <div id="panel">
+    
+    <!-- Product Add Section -->
+    <div class="panel-section">
+      <h3>Add Product</h3>
+      <input type="text" id="name" placeholder="Product Name">
+      <input type="number" id="price" placeholder="Price">
+      <input type="file" id="image">
+      <button id="add">Add Product</button>
+    </div>
+
+    <!-- Orders Section -->
+    <div class="panel-section">
+      <h3>Orders</h3>
+      <div id="orders">
+        <!-- Orders will display here -->
+      </div>
+    </div>
+
   </div>
 
-  <script src="admin.js"></script>
+  <!-- Scripts -->
+  <script type="module" src="admin.js"></script>
+  <script type="module" src="adminOrders.js"></script>
+
 </body>
 </html>
+
+
+
+
