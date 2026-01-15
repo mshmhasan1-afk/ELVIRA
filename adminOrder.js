@@ -1,7 +1,8 @@
 // ------------------ 1️⃣ Firebase Setup ------------------
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, query, orderBy, onSnapshot } from "firebase/firestore";
+import { getFirestore, collection, query, orderBy, onSnapshot } from "firebase/firestore";
 
+// Firebase config (tumhara project)
 const firebaseConfig = {
   apiKey: "AIzaSyBCBblQ0_4HVmv-_-WFbE2xn8rHGAI-DrM",
   authDomain: "elvira-8a512.firebaseapp.com",
@@ -14,11 +15,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// ------------------ 2️⃣ Orders View ------------------
+// ------------------ 2️⃣ Orders Display ------------------
 const ordersEl = document.getElementById("orders");
 
 function renderOrders(orders) {
-  ordersEl.innerHTML = ""; // Clear existing
+  ordersEl.innerHTML = "";
   orders.forEach(order => {
     const div = document.createElement("div");
     div.className = "order-card";
@@ -32,18 +33,32 @@ function renderOrders(orders) {
   });
 }
 
-// Real-time updates
+// ------------------ 3️⃣ Gmail Script Email Notification ------------------
+function sendEmailNotification(order){
+  fetch("https://script.google.com/macros/s/AKfycbzoMYIAfoa88OEo83SWhpSUClsBmLC8tZZp-LgsHz8Hwww4UbYH-BO5m_qq9woiIOyh/exec", {
+    method: "POST",
+    body: JSON.stringify({
+      name: order.name,
+      price: order.price,
+      image: order.image,
+      timestamp: new Date(order.timestamp.seconds*1000).toLocaleString()
+    })
+  }).then(res => console.log("Email sent via Gmail Script"))
+    .catch(err => console.error(err));
+}
+
+// ------------------ 4️⃣ Real-time Orders + Notifications ------------------
 const q = query(collection(db, "orders"), orderBy("timestamp", "desc"));
 onSnapshot(q, (snapshot) => {
   const orders = [];
   snapshot.forEach(doc => orders.push(doc.data()));
   renderOrders(orders);
 
-  // Optional: browser alert for new orders
-  if(snapshot.docChanges().some(change => change.type === "added")) {
-    alert("New Order Received!");
-  }
+  // Alert & send email for new orders only
+  snapshot.docChanges().forEach(change => {
+    if(change.type === "added") {
+      alert("New Order Received!");
+      sendEmailNotification(change.doc.data());
+    }
+  });
 });
-
-
-
