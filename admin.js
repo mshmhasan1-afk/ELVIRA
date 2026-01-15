@@ -1,88 +1,37 @@
-// ------------------ 1️⃣ Firebase Import & Config ------------------
-import { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-
-// Firebase config (tumhara jo mila)
-const firebaseConfig = {
-  apiKey: "AIzaSyBCBblQ0_4HVmv-_-WFbE2xn8rHGAI-DrM",
-  authDomain: "elvira-8a512.firebaseapp.com",
-  projectId: "elvira-8a512",
-  storageBucket: "elvira-8a512.appspot.com",
-  messagingSenderId: "699500729069",
-  appId: "1:699500729069:web:05b7fee369e039ae73f2e4"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const storage = getStorage(app);
-
-// ------------------ 2️⃣ Admin Login ------------------
-const loginBtn = document.getElementById("login");
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
+const loginBtn = document.getElementById("login-btn");
 const panel = document.getElementById("panel");
+const loginSection = document.getElementById("login-section");
 
-loginBtn.addEventListener("click", () => {
-  const email = emailInput.value;
-  const password = passwordInput.value;
+loginBtn.addEventListener("click", ()=>{
+  const email = document.getElementById("admin-email").value;
+  const pass = document.getElementById("admin-pass").value;
 
-  signInWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      if (email !== "mshmhasan1@gmail.com") {
-        alert("Unauthorized");
-        auth.signOut();
-        return;
-      }
-      panel.style.display = "block";
-      document.querySelector(".admin-login").style.display = "none";
-    })
-    .catch(err => alert(err.message));
+  // Simple check (hardcoded admin email)
+  if(email==="mshmhasan1@gmail.com" && pass==="123456"){ 
+    loginSection.style.display="none";
+    panel.style.display="block";
+  }else{
+    alert("Invalid admin credentials");
+  }
 });
 
-// ------------------ 3️⃣ Add Product ------------------
-const addBtn = document.getElementById("add");
-const nameInput = document.getElementById("name");
-const priceInput = document.getElementById("price");
-const imageInput = document.getElementById("image");
+// Product Add
+document.getElementById("add").addEventListener("click", ()=>{
+  const name = document.getElementById("name").value;
+  const price = document.getElementById("price").value;
+  const imageInput = document.getElementById("image");
 
-addBtn.addEventListener("click", async () => {
-  const name = nameInput.value;
-  const price = priceInput.value;
+  if(!name || !price || !imageInput.files.length){ alert("Fill all fields"); return;}
+
   const file = imageInput.files[0];
-
-  if (!name || !price || !file) {
-    alert("Please fill all fields");
-    return;
+  const reader = new FileReader();
+  reader.onload = function(e){
+    db.collection("products").add({
+      name, price, image:e.target.result, timestamp:firebase.firestore.FieldValue.serverTimestamp()
+    }).then(()=>{ alert("Product Added"); });
   }
-
-  try {
-    // Upload image to Firebase Storage
-    const storageRef = ref(storage, `products/${file.name}`);
-    await uploadBytes(storageRef, file);
-    const url = await getDownloadURL(storageRef);
-
-    // Add product to Firestore
-    await addDoc(collection(db, "products"), {
-      name: name,
-      price: Number(price),
-      image: url
-    });
-
-    alert("Product added successfully!");
-    nameInput.value = "";
-    priceInput.value = "";
-    imageInput.value = "";
-
-  } catch (err) {
-    console.error(err);
-    alert("Error adding product");
-  }
+  reader.readAsDataURL(file);
 });
-
 
 
 
