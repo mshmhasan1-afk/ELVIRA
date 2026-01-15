@@ -7,17 +7,49 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Header / Logo -->
   <header>
     <img id="logo" src="assets/logo.png" alt="ELVIRA Logo">
-    <h1>ELVIRA Luxury Bags</h1>
+    <div>
+      <h1>ELVIRA Luxury Bags</h1>
+      <!-- Website Starting Description -->
+      <p class="hero-description">
+        Discover exclusive designer bags in Black & Gold elegance. Browse our premium collection and add to cart effortlessly. Experience luxury, style, and convenience in one place.
+      </p>
+    </div>
   </header>
 
-  <main id="products"></main>
+  <!-- Products Section -->
+  <main>
+    <div id="products" class="products-grid">
+      <!-- Products will be fetched from Firebase and displayed here -->
+    </div>
+  </main>
 
+  <!-- Optional Footer -->
   <footer>
-    <p>&copy; 2026 ELVIRA. All rights reserved.</p>
+    <p>&copy; 2026 ELVIRA Luxury Bags</p>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- Hidden Admin Trigger -->
+  <script>
+    let logo = document.getElementById("logo");
+    let clickCount = 0;
+    let clickTimer;
+    logo.addEventListener("click", () => {
+      clickCount++;
+      if(clickCount === 5){
+        window.location.href = "admin.html"; // Open hidden admin panel
+      }
+      clearTimeout(clickTimer);
+      clickTimer = setTimeout(() => { clickCount = 0; }, 3000); // Reset after 3 sec
+    });
+  </script>
+
+  <!-- Scripts -->
+  <script type="module" src="script.js"></script>
 </body>
 </html>
+
+
+
