@@ -3,53 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ELVIRA | Luxury Bags</title>
+  <title>Elvira Luxury Bags</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 </head>
 <body>
-  <!-- Header / Logo -->
+
   <header>
-    <img id="logo" src="assets/logo.png" alt="ELVIRA Logo">
-    <div>
-      <h1>ELVIRA Luxury Bags</h1>
-      <!-- Website Starting Description -->
-      <p class="hero-description">
-        Discover exclusive designer bags in Black & Gold elegance. Browse our premium collection and add to cart effortlessly. Experience luxury, style, and convenience in one place.
-      </p>
-    </div>
+    <img src="assets/logo.png" alt="Elvira Logo" width="120">
+    <h1>Elvira Luxury Bags</h1>
   </header>
 
-  <!-- Products Section -->
   <main>
-    <div id="products" class="products-grid">
-      <!-- Products will be fetched from Firebase and displayed here -->
+    <div id="products" class="product-grid">
+      <!-- Products will be displayed here -->
     </div>
   </main>
 
-  <!-- Optional Footer -->
-  <footer>
-    <p>&copy; 2026 ELVIRA Luxury Bags</p>
-  </footer>
-
-  <!-- Hidden Admin Trigger -->
-  <script>
-    let logo = document.getElementById("logo");
-    let clickCount = 0;
-    let clickTimer;
-    logo.addEventListener("click", () => {
-      clickCount++;
-      if(clickCount === 5){
-        window.location.href = "admin.html"; // Open hidden admin panel
-      }
-      clearTimeout(clickTimer);
-      clickTimer = setTimeout(() => { clickCount = 0; }, 3000); // Reset after 3 sec
-    });
-  </script>
-
-  <!-- Scripts -->
-  <script type="module" src="script.js"></script>
+  <script src="script.js"></script>
+  <script src="cart.js"></script>
 </body>
 </html>
-
-
-
