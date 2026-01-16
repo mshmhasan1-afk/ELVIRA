@@ -16,7 +16,7 @@ const db = firebase.firestore();
 const storage = firebase.storage();
 
 // Admin Login
-const loginBtn = document.getElementById("login-btn");
+const loginBtn = document.getElementByld("login-button");
 
 loginBtn.addEventListener("click", () => {
   const email = document.getElementById("email").value;
