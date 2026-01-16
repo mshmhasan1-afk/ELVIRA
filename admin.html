@@ -1,61 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Elvira Admin Panel</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #000;
-      color: #fff;
-      padding: 20px;
-    }
-    input, button {
-      padding: 10px;
-      margin: 5px 0;
-      width: 100%;
-    }
-    button {
-      background: gold;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    #admin-panel {
-      display: none;
-      margin-top: 20px;
-    }
-  </style>
+        .box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box; /* Isse input box se bahar nahi niklega */
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #admin-panel {
+            display: none; /* Login se pehle hide rahega */
+            margin-top: 20px;
+        }
+    </style>
 </head>
-
 <body>
 
-  <h2>Elvira Admin Login</h2>
+    <div class="box">
+        <div id="login-panel">
+            <h2>Admin Login</h2>
+            <input type="email" id="email" placeholder="Admin Email">
+            <input type="password" id="password" placeholder="Password">
+            <button id="login-button">Login</button>
+        </div>
 
-  <!-- LOGIN -->
-  <div id="login-panel">
-    <input type="email" id="email" placeholder="Admin Email">
-    <input type="password" id="password" placeholder="Password">
-    <button id="login-btn">Login</button>
-  </div>
+        <div id="admin-panel">
+            <h2 style="color: green;">Login Successful!</h2>
+            <p>Welcome, Admin.</p>
+        </div>
+    </div>
 
-  <!-- ADMIN PANEL -->
-  <div id="admin-panel">
-    <h3>Welcome Admin</h3>
-    <p>Login successful.</p>
-  </div>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
-  <!-- 🔥 Firebase v8 CDN (VERY IMPORTANT ORDER) -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-
-  <!-- ✅ Your JS (NO type="module") -->
-  <script src="admin.js"></script>
+    <script type="module" src="app.js"></script>
 
 </body>
 </html>
-
