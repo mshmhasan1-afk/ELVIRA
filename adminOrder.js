@@ -1,11 +1,3 @@
-1 of 192
-(no subject)
-Inbox
-
-Moonlit Soul
-10:51 PM (4 minutes ago)
-to me
-
 // Firebase setup (compat)
 const firebaseConfig = {
   apiKey: "AIzaSyBCBblQ0_4HVmv-_-WFbE2xn8rHGAI-DrM",
