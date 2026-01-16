@@ -2,28 +2,116 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Elvira Luxury Bags</title>
-  
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #000;
+      color: #fff;
+    }
+
+    header {
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid gold;
+    }
+
+    header h1 {
+      color: gold;
+      letter-spacing: 2px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 30px;
+    }
+
+    .product {
+      background: #111;
+      border: 1px solid gold;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .product img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .product h3 {
+      margin: 10px 0 5px;
+      color: gold;
+    }
+
+    .product p {
+      margin: 5px 0;
+    }
+
+    .product button {
+      background: gold;
+      color: black;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      border-top: 1px solid gold;
+      color: #aaa;
+    }
+  </style>
 </head>
+
 <body>
 
   <header>
-    <img src="assets/logo.png" alt="Elvira Logo" width="120">
     <h1>Elvira Luxury Bags</h1>
+    <p>Elegance • Class • Luxury</p>
   </header>
 
-  <main>
-    <div id="products" class="product-grid">
-      </div>
-  </main>
+  <section class="products">
 
-  <script src="script.js"></script>
-  <script src="cart.js"></script>
+    <div class="product">
+      <img src="assets/bag1.jpg">
+      <h3>Elvira Classic</h3>
+      <p>Rs. 8,500</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="assets/bag2.jpg">
+      <h3>Elvira Gold</h3>
+      <p>Rs. 9,200</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="assets/bag3.jpg">
+      <h3>Elvira Noir</h3>
+      <p>Rs. 10,000</p>
+      <button>Add to Cart</button>
+    </div>
+
+  </section>
+
+  <footer>
+    © 2026 Elvira Luxury Bags
+  </footer>
+
 </body>
 </html>
+
+
+
