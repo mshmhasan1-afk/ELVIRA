@@ -1,71 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Admin Panel</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <title>Elvira Admin Panel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #111;
+      background: #000;
       color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      padding: 20px;
     }
-
-    .box {
-      background: #1c1c1c;
-      padding: 25px;
-      border-radius: 8px;
-      width: 320px;
-    }
-
     input, button {
-      width: 100%;
       padding: 10px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 5px;
+      margin: 5px 0;
+      width: 100%;
     }
-
     button {
-      background: #c9a44c;
-      font-weight: bold;
+      background: gold;
+      border: none;
       cursor: pointer;
+      font-weight: bold;
     }
-
     #admin-panel {
       display: none;
+      margin-top: 20px;
     }
   </style>
 </head>
+
 <body>
 
-  <!-- LOGIN PANEL -->
-  <div class="box" id="login-panel">
-    <h2>Admin Login</h2>
+  <h2>Elvira Admin Login</h2>
+
+  <!-- LOGIN -->
+  <div id="login-panel">
     <input type="email" id="email" placeholder="Admin Email">
     <input type="password" id="password" placeholder="Password">
     <button id="login-btn">Login</button>
   </div>
 
   <!-- ADMIN PANEL -->
-  <div class="box" id="admin-panel">
-    <h2>Welcome Admin</h2>
-    <p>Login successful ✅</p>
+  <div id="admin-panel">
+    <h3>Welcome Admin</h3>
+    <p>Login successful.</p>
   </div>
 
-  <!-- 🔥 FIREBASE CDN (VERY IMPORTANT) -->
+  <!-- 🔥 Firebase v8 CDN (VERY IMPORTANT ORDER) -->
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
-  <!-- ADMIN JS -->
+  <!-- ✅ Your JS (NO type="module") -->
   <script src="admin.js"></script>
 
 </body>
 </html>
+
